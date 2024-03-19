@@ -1,1 +1,1 @@
-delete notes with swipe action
+ in the NoteA app, notes could be deleted with a swipe action

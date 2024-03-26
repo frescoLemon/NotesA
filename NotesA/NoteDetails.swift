@@ -12,10 +12,9 @@ struct NoteDetails: View {
     @Binding var notes: [Note]
     
     @Binding var note: Note
+    
     @State private var title = ""
-
     @Environment(\.dismiss) private var dismiss
-
     @State private var italic = false
     @State private var bold = false
     
@@ -63,7 +62,7 @@ struct NoteDetails: View {
                     }
                 }
             }
-            .background(Gradient(colors: gradientColors))  
+            .background(Gradient(colors: gradientColors))
             .foregroundColor(.black)
             
             

@@ -8,6 +8,7 @@
 import Foundation
 
 struct Note: Identifiable, Hashable, Codable {
+    
     var id = UUID()
     var title: String
     var text: String
@@ -22,12 +23,16 @@ struct Note: Identifiable, Hashable, Codable {
     static let archiveURL = documentsDirectory.appendingPathComponent("notes")
         .appendingPathExtension("plist")
     
+    
+    
     static func saveToFile (notes:[Note]) {
         let propertyListEncoder = PropertyListEncoder()
         let encodedNotes = try? propertyListEncoder.encode(notes)
        
         try? encodedNotes?.write(to: archiveURL, options: .noFileProtection)
+        print("saved")
     }
+    
     
     static func loadFromFile() -> [Note] {
         var dNotes:[Note] = []
@@ -39,8 +44,10 @@ struct Note: Identifiable, Hashable, Codable {
            from: retrievedNotesData) {
            dNotes = decodedNotes
         }
+        print("loaded")
 
         return dNotes
+
     }
      
   

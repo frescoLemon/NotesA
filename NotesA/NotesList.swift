@@ -8,32 +8,25 @@
 import SwiftUI
 
 
-
 let gradientColors: [Color] = [.gradientTop, .gradientBottom]
 
 struct NotesList: View {
     
 @State var note: Note
-@State var notes: [Note]
-@State private var isEditing = false
-
-@State private var isAddingNewNote = false
+@Binding var notes: [Note]
     
-   
-    
-   
 var body: some View {
 
             NavigationStack {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 16)
+                    RoundedRectangle(cornerRadius: 17)
                     .fill(Gradient(colors: gradientColors))
                     .ignoresSafeArea()
 
                 List {
                     ForEach($notes, id: \.self) { $note in
                      
-                        NavigationLink(destination: NoteDetails(notes: .constant(Note.sampleNotes), note: $note)) {
+                                             NavigationLink(destination: NoteDetails(notes: $notes, note: $note)) {
                             NoteView(note: note)
                                 
                         }
@@ -56,11 +49,6 @@ var body: some View {
                 .scrollContentBackground(.hidden)
                 .navigationTitle("Notes")
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(isEditing ? "Done" : "Edit") {
-                            isEditing.toggle()
-                        }
-                    }
                    
                     ToolbarItem(placement: .topBarTrailing)
                     {
@@ -74,14 +62,11 @@ var body: some View {
                 }
                 
 
-            }               
-            .onAppear(){
-               notes = Note.loadFromFile()
-                print(Note.documentsDirectory)
             }
-            .onDisappear{
-                Note.saveToFile(notes: notes)
-            }
+                
+            
+    
+                 
     }
           
        
@@ -90,5 +75,5 @@ var body: some View {
 }
 
 #Preview {
-    NotesList(note: Note.sampleNotes[0], notes: Note.sampleNotes)
+    NotesList(note: Note.sampleNotes[0], notes: Binding.constant(Note.sampleNotes))
 }

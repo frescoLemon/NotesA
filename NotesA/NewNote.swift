@@ -10,14 +10,9 @@ import SwiftUI
 struct NewNote: View {
   
     @Binding var notes: [Note]
-
     @State var newNote = Note.emptyNote
     @State private var fontSize = 12.0
-
     @Environment(\.dismiss) private var dismiss
-
-  
-    
     @State private var italic = false
     @State private var bold = false
     

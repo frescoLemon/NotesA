@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NoteView: View {
+  
     let note: Note
     
     var body: some View {
